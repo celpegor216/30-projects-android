@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "849455831549",
+    "project_id": "pjt10-db231",
+    "storage_bucket": "pjt10-db231.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:849455831549:android:033d026ac5207b989de194",
+        "android_client_info": {
+          "package_name": "fastcampus.aop.pjt10_quotes_of_the_day"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCm2bzOXBZhm6WxkIDsKmUrxiDDS199ZLs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
