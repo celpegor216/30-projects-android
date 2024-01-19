@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "50467362557",
+    "firebase_url": "https://pjt13-7e213-default-rtdb.firebaseio.com",
+    "project_id": "pjt13-7e213",
+    "storage_bucket": "pjt13-7e213.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:50467362557:android:edbbe081ffaf76a8371094",
+        "android_client_info": {
+          "package_name": "fastcampus.aop.pjt13_tinder"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBsU5Sgiie6q-wXiDFgAUzl1nPQMv74QKk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">pjt13-tinder</string>
+    <string name="write_name">이름을 입력해주세요.</string>
+    <string name="save">저장</string>
+</resources>
