@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">pjt14-c2c-marketplace</string>
+    <string name="home">홈</string>
+    <string name="chat">채팅</string>
+    <string name="myPage">나의 정보</string>
+    <string name="c2c_marketplace">중고 거래</string>
+    <string name="add_item">상품 등록</string>
+    <string name="submit">등록</string>
+    <string name="title">제목</string>
+    <string name="price">가격</string>
+    <string name="add_image">사진 등록</string>
+    <string name="sign_up">회원가입</string>
+    <string name="sign_in">로그인</string>
+    <string name="chatList">채팅방</string>
+    <string name="send">전송</string>
+</resources>
