@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">pjt19_ott_intro</string>
+    <string name="free_trial">2주 무료 체험</string>
+    <string name="logo">LOGO</string>
+    <string name="login">로그인</string>
+    <string name="intro_title">지금 무료로\n무제한 감상 시작</string>
+    <string name="contents_title">영화, 드라마, 예능 등 8만 편의 작품</string>
+    <string name="gathering_displays_title">다양한 디바이스에서\n자유롭게 감상</string>
+    <string name="gathering_displays_content">PC, 태블릿, 폰, TV, 크롬캐스트\n어디서나 최고의 화질로</string>
+    <string name="curation_title">5억 개 평가 데이터 기반\n정확한 추천</string>
+    <string name="curation_content">취향에 안 맞는 작품에\n두 시간을 낭비할 수는 없으니까</string>
+</resources>

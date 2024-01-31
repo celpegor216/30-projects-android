@@ -1,0 +1,13 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Base.Theme.Pjt19_ott_intro" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Customize your light theme here. -->
+    </style>
+
+    <style name="Theme.Pjt19_ott_intro" parent="Base.Theme.Pjt19_ott_intro" />
+
+    <style name="AppTheme.AppBarOverlay" parent="Theme.Pjt19_ott_intro">
+        <item name="android:textColorPrimary">@color/white</item>
+        <item name="android:textColorSecondary">@color/black</item>
+    </style>
+</resources>
