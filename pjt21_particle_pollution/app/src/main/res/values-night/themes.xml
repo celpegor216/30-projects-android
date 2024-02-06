@@ -1,0 +1,7 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Base.Theme.Pjt21_particle_pollution" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Customize your dark theme here. -->
+        <!-- <monitoringStation name="colorPrimary">@color/my_dark_primary</monitoringStation> -->
+    </style>
+</resources>
