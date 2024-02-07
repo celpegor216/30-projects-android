@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">pjt22_free_image_finder</string>
+    <string name="please_input_search_keyword">검색어를 입력해주세요</string>
+    <string name="error_description">문제가 발생했습니다.\n아래로 당겨서 새로고침 해주세요.</string>
+</resources>
