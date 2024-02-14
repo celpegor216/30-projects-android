@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "379768007559",
+    "project_id": "pjt24-e2d0d",
+    "storage_bucket": "pjt24-e2d0d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:379768007559:android:1ac38a343cd54a3c9a4122",
+        "android_client_info": {
+          "package_name": "fastcampus.aop.pjt24_online_store"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "379768007559-vb8cm445pd1khe9301ds10pf9dmhc9a0.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "fastcampus.aop.pjt24_online_store",
+            "certificate_hash": "df212df39bb51d16ce5104f39d31a0cc9b0212d7"
+          }
+        },
+        {
+          "client_id": "379768007559-35m2o1locc1cqirpclvdachv11ngchk7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA6O8JN4CSNw_kVTbVORZeJSMjcfO5kI9I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "379768007559-35m2o1locc1cqirpclvdachv11ngchk7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
