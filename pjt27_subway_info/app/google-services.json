@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "486331045545",
+    "project_id": "pjt27-a3f3d",
+    "storage_bucket": "pjt27-a3f3d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:486331045545:android:81c983d1841a7963d03bb8",
+        "android_client_info": {
+          "package_name": "fastcampus.aop.pjt27_subway_info"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAZFGKyj6dhFH1pnWm5-M_JmswEi6R4bSc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
