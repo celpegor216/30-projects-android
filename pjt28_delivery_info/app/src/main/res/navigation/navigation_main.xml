@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/navigation_main"
+    app:startDestination="@id/tracking_items_dest">
+
+    <fragment
+        android:id="@+id/tracking_items_dest"
+        android:name="fastcampus.aop.pjt28_delivery_info.presentation.trackingitems.TrackingItemsFragment"
+        android:label="택배 조회">
+
+        <action
+            android:id="@+id/to_add_tracking_item"
+            app:destination="@id/add_tracking_item_dest" />
+
+        <action
+            android:id="@+id/to_tracking_history"
+            app:destination="@id/tracking_history_dest" />
+    </fragment>
+
+
+    <fragment
+        android:id="@+id/add_tracking_item_dest"
+        android:name="fastcampus.aop.pjt28_delivery_info.presentation.addtrackingitem.AddTrackingItemFragment"
+        android:label="운송장 추가">
+
+    </fragment>
+
+
+    <fragment
+        android:id="@+id/tracking_history_dest"
+        android:name="fastcampus.aop.pjt28_delivery_info.presentation.trackinghistory.TrackingHistoryFragment"
+        android:label="배송 상세">
+
+        <argument
+            android:name="item"
+            app:argType="fastcampus.aop.pjt28_delivery_info.data.entity.TrackingItem" />
+
+        <argument
+            android:name="information"
+            app:argType="fastcampus.aop.pjt28_delivery_info.data.entity.TrackingInformation" />
+
+    </fragment>
+</navigation>
