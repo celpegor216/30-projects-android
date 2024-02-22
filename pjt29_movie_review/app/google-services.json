@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "703808180749",
+    "project_id": "pjt29-cdfd8",
+    "storage_bucket": "pjt29-cdfd8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:703808180749:android:65cc2b9966f39a92f93b44",
+        "android_client_info": {
+          "package_name": "fastcampus.aop.pjt29_movie_review"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBLeyvGTnk53cXUUna-ufCunolkt_KB5_g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
