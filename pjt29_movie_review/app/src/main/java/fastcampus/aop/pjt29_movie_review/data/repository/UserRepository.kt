@@ -1,8 +1,11 @@
 package fastcampus.aop.pjt29_movie_review.data.repository
 
-import fastcampus.aop.pjt29_movie_review.domain.model.Movie
+import fastcampus.aop.pjt29_movie_review.domain.model.User
 
-interface MovieRepository {
 
-    suspend fun getAllMovies(): List<Movie>
+interface UserRepository {
+
+    suspend fun getUser(): User?
+
+    suspend fun saveUser(user: User)
 }

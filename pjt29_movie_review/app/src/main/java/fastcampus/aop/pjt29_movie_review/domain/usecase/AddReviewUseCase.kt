@@ -6,7 +6,7 @@ import fastcampus.aop.pjt29_movie_review.domain.model.Movie
 import fastcampus.aop.pjt29_movie_review.domain.model.Review
 import fastcampus.aop.pjt29_movie_review.domain.model.User
 
-class SubmitReviewUseCase(
+class AddReviewUseCase(
     private val userRepository: UserRepository,
     private val reviewRepository: ReviewRepository
 ) {
@@ -25,9 +25,10 @@ class SubmitReviewUseCase(
 
         return reviewRepository.addReview(
             Review(
-                id = user.id,
-                createdAt = System.currentTimeMillis(),
-                
+                userId = user!!.id,
+                movieId = movie.id,
+                content = content,
+                score = score
             )
         )
     }

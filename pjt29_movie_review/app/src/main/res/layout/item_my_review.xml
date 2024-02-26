@@ -12,9 +12,10 @@
         android:ellipsize="end"
         android:gravity="center_vertical"
         android:maxLines="1"
+        android:text="✏️ 나의 리뷰"
         android:textColor="@color/black"
         android:textSize="12sp"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
@@ -31,7 +32,7 @@
         app:layout_constrainedWidth="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintHorizontal_bias="1"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/authorIdTextView" />
 
@@ -47,5 +48,17 @@
         app:drawableTint="@color/black"
         app:layout_constraintStart_toStartOf="@id/contentsTextView"
         app:layout_constraintTop_toTopOf="@id/contentsTextView" />
+
+    <TextView
+        android:id="@+id/deleteButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:alpha="0.5"
+        android:clickable="true"
+        android:focusable="true"
+        android:padding="6dp"
+        android:text="@string/delete"
+        app:layout_constraintEnd_toEndOf="@id/contentsTextView"
+        app:layout_constraintTop_toBottomOf="@id/contentsTextView" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">pjt29_movie_review</string>
+    <string name="title_home">영화</string>
+    <string name="title_my_page">내 리뷰</string>
+    <string name="title_reviews">영화 상세</string>
+    <string name="review_hint">리뷰를 남겨주세요 (5자 이상)</string>
+    <string name="content_limit_initial_value">(0/100)</string>
+    <string name="submit_review">리뷰 남기기</string>
+    <string name="delete">삭제</string>
+</resources>
