@@ -1,0 +1,13 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Base.Theme.Pjt30_food_delivery" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Customize your light theme here. -->
+        
+        <item name="toolbarStyle">@style/Widget.Pjt30_food_delivery.Toolbar</item>
+        <item name="toolbarWithArrowButtonStyle">@style/Widget.Pjt30_food_delivery.Toolbar.WithArrow</item>
+        <item name="toolbarWithCloseButtonStyle">@style/Widget.Pjt30_food_delivery.Toolbar.WithClose</item>
+        
+    </style>
+
+    <style name="Theme.Pjt30_food_delivery" parent="Base.Theme.Pjt30_food_delivery" />
+</resources>
