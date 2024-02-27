@@ -13,6 +13,12 @@
     <string name="review_count">(%1$d++)</string>
     <string name="delivery_time">%1$d~%2$d분</string>
     <string name="delivery_tip">배달팁 %1$,d~%2$,d분</string>
+
+    <!-- Message -->
     <string name="please_setup_your_location_permission">위치 권한을 허용해주세요.</string>
     <string name="can_not_assigned_permission">권한을 얻지 못했습니다.</string>
+    <string name="can_not_load_address_info">위치 정보를 불러오는 데 실패했습니다.</string>
+    <string name="loading">로딩 중</string>
+    <string name="set_this_location">이 위치로 주소 설정</string>
+    <string name="please_check_location">위치가 올바른지 확인해주세요.</string>
 </resources>
