@@ -3,6 +3,7 @@ package fastcampus.aop.pjt30_food_delivery.util.mapper
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import fastcampus.aop.pjt30_food_delivery.databinding.ViewholderEmptyBinding
+import fastcampus.aop.pjt30_food_delivery.databinding.ViewholderFoodMenuBinding
 import fastcampus.aop.pjt30_food_delivery.databinding.ViewholderRestaurantBinding
 import fastcampus.aop.pjt30_food_delivery.model.CellType
 import fastcampus.aop.pjt30_food_delivery.model.Model
@@ -11,6 +12,7 @@ import fastcampus.aop.pjt30_food_delivery.util.provider.ResourcesProvider
 import fastcampus.aop.pjt30_food_delivery.widget.adapter.viewholder.EmptyViewHolder
 import fastcampus.aop.pjt30_food_delivery.widget.adapter.viewholder.ModelViewHolder
 import fastcampus.aop.pjt30_food_delivery.widget.adapter.viewholder.restaurant.RestaurantViewHolder
+import fastcampus.aop.pjt30_food_delivery.widget.adapter.viewholder.restaurant.food.FoodMenuViewHolder
 
 object ModelViewHolderMapper {
 
@@ -32,6 +34,12 @@ object ModelViewHolderMapper {
 
             CellType.RESTAURANT_CELL -> RestaurantViewHolder(
                 ViewholderRestaurantBinding.inflate(inflater, parent, false),
+                viewModel,
+                resourcesProvider
+            )
+
+            CellType.FOOD_CELL -> FoodMenuViewHolder(
+                ViewholderFoodMenuBinding.inflate(inflater, parent, false),
                 viewModel,
                 resourcesProvider
             )

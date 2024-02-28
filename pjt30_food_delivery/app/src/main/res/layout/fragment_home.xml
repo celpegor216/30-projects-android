@@ -35,10 +35,14 @@
         android:id="@+id/tabLayout"
         android:layout_width="0dp"
         android:layout_height="40dp"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/toolbar"
-        android:visibility="gone"/>
+        app:tabGravity="fill"
+        app:tabIndicatorFullWidth="false"
+        app:tabMaxWidth="0dp"
+        app:tabMode="auto" />
 
     <View
         android:layout_width="0dp"
@@ -53,13 +57,13 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:scrollbars="none"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tabLayout"
-        android:visibility="gone">
+        app:layout_constraintTop_toBottomOf="@id/tabLayout">
 
         <com.google.android.material.chip.ChipGroup
-            android:id="@+id/filterChipGroup"
+            android:id="@+id/orderChipGroup"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingHorizontal="12dp"
@@ -78,6 +82,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/initialize"
                 android:visibility="gone"
+                app:chipIcon="@drawable/ic_refresh"
                 app:chipIconEnabled="true" />
 
             <com.google.android.material.chip.Chip
@@ -86,6 +91,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/fast_delivery"
+                app:chipIcon="@drawable/ic_thunder"
                 app:chipIconEnabled="true" />
 
             <com.google.android.material.chip.Chip
@@ -94,6 +100,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/low_delivery_tip"
+                app:chipIcon="@drawable/ic_down"
                 app:chipIconEnabled="true" />
 
             <com.google.android.material.chip.Chip
@@ -110,6 +117,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/top_rate"
+                app:chipIcon="@drawable/ic_star"
                 app:chipIconEnabled="true" />
 
 
@@ -121,11 +129,11 @@
         android:id="@+id/viewPager"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/filterScrollView"
-        android:visibility="gone" />
+        app:layout_constraintTop_toBottomOf="@id/filterScrollView" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/basketButtonContainer"

@@ -4,11 +4,9 @@ import android.Manifest
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
-import android.content.Intent
 import android.location.Location
 import android.location.LocationListener
 import android.location.LocationManager
-import android.util.Log
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.view.isGone
@@ -21,6 +19,7 @@ import fastcampus.aop.pjt30_food_delivery.databinding.FragmentHomeBinding
 import fastcampus.aop.pjt30_food_delivery.screen.base.BaseFragment
 import fastcampus.aop.pjt30_food_delivery.screen.main.home.restaurant.RestaurantCategory
 import fastcampus.aop.pjt30_food_delivery.screen.main.home.restaurant.RestaurantListFragment
+import fastcampus.aop.pjt30_food_delivery.screen.main.home.restaurant.RestaurantOrder
 import fastcampus.aop.pjt30_food_delivery.screen.mylocation.MyLocationActivity
 import fastcampus.aop.pjt30_food_delivery.widget.adapter.RestaurantListFragmentPagerAdapter
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -75,6 +74,36 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
         locationTitleText.setOnClickListener {
             changeLocation()
         }
+
+        orderChipGroup.setOnCheckedChangeListener { _, checkedId ->
+            when (checkedId) {
+                R.id.chipDefault -> {
+                    chipInitialize.isGone = true
+                    changeRestaurantOrder(RestaurantOrder.DEFAULT)
+                }
+                R.id.chipInitialize -> {
+                    chipDefault.isChecked = true
+                }
+                R.id.chipLowDeliveryTip -> {
+                    chipInitialize.isVisible = true
+                    changeRestaurantOrder(RestaurantOrder.LOW_DELIVERY_TIP)
+                }
+                R.id.chipFastDelivery -> {
+                    chipInitialize.isVisible = true
+                    changeRestaurantOrder(RestaurantOrder.FAST_DELIVERY)
+                }
+                R.id.chipTopRate -> {
+                    chipInitialize.isVisible = true
+                    changeRestaurantOrder(RestaurantOrder.TOP_RATE)
+                }
+            }
+        }
+    }
+
+    private fun changeRestaurantOrder(order: RestaurantOrder) {
+        viewPagerAdapter.fragmentList.forEach {
+            it.viewModel.setRestaurantOrder(order)
+        }
     }
 
     private fun changeLocation() {
@@ -90,6 +119,8 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
         val restaurantCategories = RestaurantCategory.values()
 
         if (::viewPagerAdapter.isInitialized.not()) {
+            orderChipGroup.isVisible = true
+
             val restaurantListFragmentPages = restaurantCategories.map {
                 RestaurantListFragment.newInstance(it, locationLatLngEntity)
             }
@@ -102,7 +133,7 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
             viewPager.adapter = viewPagerAdapter
             viewPager.offscreenPageLimit = restaurantCategories.size
             TabLayoutMediator(tabLayout, viewPager) { tab, position ->
-                tab.setText(restaurantCategories[position].categroyNameId)
+                tab.setText(restaurantCategories[position].categoryNameId)
             }.attach()
         }
 
@@ -196,7 +227,6 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
 
     inner class MyLocationListener : LocationListener {
         override fun onLocationChanged(location: Location) {
-//            binding.locationTitleText.text = "${location.latitude}, ${location.longitude}"
             viewModel.loadReverseGeoInformation(
                 LocationLatLngEntity(
                     latitude = location.latitude, longitude = location.longitude

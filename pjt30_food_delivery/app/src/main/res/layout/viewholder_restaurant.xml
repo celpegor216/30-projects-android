@@ -8,7 +8,7 @@
     android:background="?attr/selectableItemBackground">
 
     <ImageView
-        android:id="@+id/restaurantImage"
+        android:id="@+id/restaurantImageView"
         android:layout_width="64dp"
         android:layout_height="64dp"
         android:layout_marginStart="16dp"
@@ -17,26 +17,26 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/restaurantTitleText"
+        android:id="@+id/restaurantTitleTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="12dp"
-        app:layout_constraintStart_toEndOf="@id/restaurantImage"
-        app:layout_constraintTop_toTopOf="@id/restaurantImage" />
+        app:layout_constraintStart_toEndOf="@id/restaurantImageView"
+        app:layout_constraintTop_toTopOf="@id/restaurantImageView" />
 
     <TextView
-        android:id="@+id/gradeText"
+        android:id="@+id/gradeTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center_vertical"
         android:textColor="@color/black"
         android:textSize="16sp"
         android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="@id/restaurantTitleText"
-        app:layout_constraintTop_toBottomOf="@id/restaurantTitleText" />
+        app:layout_constraintStart_toStartOf="@id/restaurantTitleTextView"
+        app:layout_constraintTop_toBottomOf="@id/restaurantTitleTextView" />
 
     <TextView
-        android:id="@+id/reviewCountText"
+        android:id="@+id/reviewCountTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="2dp"
@@ -44,12 +44,12 @@
         android:textSize="16sp"
         app:drawableStartCompat="@drawable/ic_star"
         app:drawableTint="@color/orange_yellow"
-        app:layout_constraintBottom_toBottomOf="@id/gradeText"
-        app:layout_constraintStart_toEndOf="@id/gradeText"
-        app:layout_constraintTop_toTopOf="@id/gradeText" />
+        app:layout_constraintBottom_toBottomOf="@id/gradeTextView"
+        app:layout_constraintStart_toEndOf="@id/gradeTextView"
+        app:layout_constraintTop_toTopOf="@id/gradeTextView" />
 
     <TextView
-        android:id="@+id/deliveryTimeText"
+        android:id="@+id/deliveryTimeTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="1dp"
@@ -57,16 +57,16 @@
         android:gravity="center_vertical"
         android:textSize="12sp"
         app:drawableStartCompat="@drawable/ic_clock"
-        app:layout_constraintStart_toStartOf="@id/gradeText"
-        app:layout_constraintTop_toBottomOf="@id/gradeText" />
+        app:layout_constraintStart_toStartOf="@id/gradeTextView"
+        app:layout_constraintTop_toBottomOf="@id/gradeTextView" />
 
     <TextView
-        android:id="@+id/deliveryTipText"
+        android:id="@+id/deliveryTipTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/black"
-        app:layout_constraintStart_toStartOf="@id/deliveryTimeText"
-        app:layout_constraintTop_toBottomOf="@id/deliveryTimeText" />
+        app:layout_constraintStart_toStartOf="@id/deliveryTimeTextView"
+        app:layout_constraintTop_toBottomOf="@id/deliveryTimeTextView" />
 
     <View
         android:layout_width="0dp"
@@ -75,7 +75,7 @@
         android:background="@color/gray_A8"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/deliveryTipText" />
+        app:layout_constraintTop_toBottomOf="@id/deliveryTipTextView" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

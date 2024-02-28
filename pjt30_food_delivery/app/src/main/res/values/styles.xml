@@ -20,11 +20,11 @@
     <style name="Widget.Pjt30_food_delivery.Chip" parent="Widget.MaterialComponents.Chip.Choice">
         <item name="chipStrokeColor">@color/brown</item>
         <item name="chipStrokeWidth">1dp</item>
-        <item name="chipBackgroundColor">@color/bg_filter_chip_state_list</item>
-        <item name="android:textColor">@color/text_filter_chip_state_list</item>
+        <item name="chipBackgroundColor">@color/bg_order_chip_state_list</item>
+        <item name="android:textColor">@color/text_order_chip_state_list</item>
         <item name="textStartPadding">8dp</item>
         <item name="android:textStyle">bold</item>
-        <item name="chipIconTint">@color/icon_filter_chip_state_list_reset</item>
+        <item name="chipIconTint">@color/icon_order_chip_state_list</item>
         <item name="chipIconSize">12dp</item>
         <item name="iconStartPadding">6dp</item>
         <item name="chipEndPadding">2dp</item>

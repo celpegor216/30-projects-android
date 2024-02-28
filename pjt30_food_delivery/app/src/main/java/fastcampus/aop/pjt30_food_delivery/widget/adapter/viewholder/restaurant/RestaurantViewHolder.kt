@@ -18,7 +18,7 @@ class RestaurantViewHolder(
 ): ModelViewHolder<RestaurantModel>(binding, viewModel, resourcesProvider) {
 
     override fun reset() = with(binding) {
-        restaurantImage.clear()
+        restaurantImageView.clear()
     }
 
     override fun bindViews(model: RestaurantModel, adapterListener: AdapterListener) = with(binding) {
@@ -32,15 +32,15 @@ class RestaurantViewHolder(
     override fun bindData(model: RestaurantModel) = with(binding) {
         super.bindData(model)
 
-        restaurantImage.load(model.restaurantImageUrl, 24f)
-        restaurantTitleText.text = model.restaurantTitle
-        gradeText.text = resourcesProvider.getString(R.string.grade_format, model.grade)
-        reviewCountText.text = resourcesProvider.getString(R.string.review_count, model.reviewCount)
+        restaurantImageView.load(model.restaurantImageUrl, 24f)
+        restaurantTitleTextView.text = model.restaurantTitle
+        gradeTextView.text = resourcesProvider.getString(R.string.grade_format, model.grade)
+        reviewCountTextView.text = resourcesProvider.getString(R.string.review_count_format, model.reviewCount)
 
         val (minTime, maxTime) = model.deliveryTimeRange
-        deliveryTimeText.text = resourcesProvider.getString(R.string.delivery_time, minTime, maxTime)
+        deliveryTimeTextView.text = resourcesProvider.getString(R.string.delivery_time_format, minTime, maxTime)
 
         val (minTip, maxTip) = model.deliveryTipRange
-        deliveryTipText.text = resourcesProvider.getString(R.string.delivery_tip, minTip, maxTip)
+        deliveryTipTextView.text = resourcesProvider.getString(R.string.delivery_tip_format, minTip, maxTip)
     }
 }

@@ -10,9 +10,9 @@
 
     <!-- Restaurant Item -->
     <string name="grade_format">%1$,.1f</string>
-    <string name="review_count">(%1$d++)</string>
-    <string name="delivery_time">%1$d~%2$d분</string>
-    <string name="delivery_tip">배달팁 %1$,d~%2$,d분</string>
+    <string name="review_count_format">(%1$d++)</string>
+    <string name="delivery_time_format">%1$d~%2$d분</string>
+    <string name="delivery_tip_format">배달팁 %1$,d~%2$,d원</string>
 
     <!-- Message -->
     <string name="please_setup_your_location_permission">위치 권한을 허용해주세요.</string>
@@ -21,4 +21,17 @@
     <string name="loading">로딩 중</string>
     <string name="set_this_location">이 위치로 주소 설정</string>
     <string name="please_check_location">위치가 올바른지 확인해주세요.</string>
+
+    <!--  Restaurant Detail  -->
+    <string name="call">전화</string>
+    <string name="like">찜</string>
+    <string name="share">공유</string>
+    <string name="delivery_time">배달 시간</string>
+    <string name="delivery_tip">배달팁</string>
+    <string name="delivery_time_expected_format">%1$d~%2$d분 소요 예정</string>
+    <string name="delivery_tip_expected_format">%1$,d~%2$,d원</string>
+
+    <!--  FoodMenu Item  -->
+    <string name="price_format">%1$,d원</string>
+
 </resources>
