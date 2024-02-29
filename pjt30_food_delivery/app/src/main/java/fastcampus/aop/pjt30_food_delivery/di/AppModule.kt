@@ -4,12 +4,15 @@ import fastcampus.aop.pjt30_food_delivery.data.entity.LocationLatLngEntity
 import fastcampus.aop.pjt30_food_delivery.data.entity.MapSearchInfoEntity
 import fastcampus.aop.pjt30_food_delivery.data.entity.RestaurantEntity
 import fastcampus.aop.pjt30_food_delivery.data.entity.RestaurantFoodEntity
+import fastcampus.aop.pjt30_food_delivery.data.preference.AppPreferenceManager
 import fastcampus.aop.pjt30_food_delivery.data.repository.map.DefaultMapRepository
 import fastcampus.aop.pjt30_food_delivery.data.repository.map.MapRepository
 import fastcampus.aop.pjt30_food_delivery.data.repository.restaurant.DefaultRestaurantRepository
 import fastcampus.aop.pjt30_food_delivery.data.repository.restaurant.RestaurantRepository
 import fastcampus.aop.pjt30_food_delivery.data.repository.restaurant.food.DefaultRestaurantFoodRepository
 import fastcampus.aop.pjt30_food_delivery.data.repository.restaurant.food.RestaurantFoodRepository
+import fastcampus.aop.pjt30_food_delivery.data.repository.restaurant.review.DefaultRestaurantReviewRepository
+import fastcampus.aop.pjt30_food_delivery.data.repository.restaurant.review.RestaurantReviewRepository
 import fastcampus.aop.pjt30_food_delivery.data.repository.user.DefaultUserRepository
 import fastcampus.aop.pjt30_food_delivery.data.repository.user.UserRepository
 import fastcampus.aop.pjt30_food_delivery.screen.main.home.HomeViewModel
@@ -33,9 +36,6 @@ val appModule = module {
     single { Dispatchers.Main }
     single { Dispatchers.IO }
 
-    // ResourcesProvider
-    single<ResourcesProvider> { DefaultResourcesProvider(androidApplication()) }
-
     // Retrofit
     single { provideGsonConvertFactory() }
     single { buildOkHttpClient() }
@@ -45,8 +45,8 @@ val appModule = module {
     single { provideFoodApiService(get(qualifier = named("food"))) }
 
     // ViewModel
-    viewModel { HomeViewModel(get(), get()) }
-    viewModel { MyViewModel() }
+    viewModel { HomeViewModel(get(), get(), get()) }
+    viewModel { MyViewModel(get(), get()) }
     viewModel { (restaurantCategory: RestaurantCategory, locationLatLngEntity: LocationLatLngEntity) ->
         RestaurantListViewModel(restaurantCategory, locationLatLngEntity, get())
     }
@@ -61,19 +61,29 @@ val appModule = module {
     viewModel { (restaurantId: Long, restaurantFoodList: List<RestaurantFoodEntity>) ->
         RestaurantMenuListViewModel(
             restaurantId,
-            restaurantFoodList
+            restaurantFoodList,
+            get()
         )
     }
-    viewModel { RestaurantReviewListViewModel() }
+    viewModel { (restaurantTitle: String) -> RestaurantReviewListViewModel(restaurantTitle, get()) }
 
     // Repository
     single<RestaurantRepository> { DefaultRestaurantRepository(get(), get(), get()) }
     single<MapRepository> { DefaultMapRepository(get(), get()) }
     single<UserRepository> { DefaultUserRepository(get(), get(), get()) }
-    single<RestaurantFoodRepository> { DefaultRestaurantFoodRepository(get(), get()) }
+    single<RestaurantFoodRepository> { DefaultRestaurantFoodRepository(get(), get(), get()) }
+    single<RestaurantReviewRepository> { DefaultRestaurantReviewRepository(get()) }
 
     // Database
     single { provideDB(androidApplication()) }
     single { provideLocationDao(get()) }
     single { provideRestaurantDao(get()) }
+    single { provideFoodMenuBasketDao(get()) }
+
+    // SharedPreferences
+    single { AppPreferenceManager(androidApplication()) }
+
+    // ResourcesProvider
+    single<ResourcesProvider> { DefaultResourcesProvider(androidApplication()) }
+
 }

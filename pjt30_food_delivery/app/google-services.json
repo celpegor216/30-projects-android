@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "375062403447",
+    "project_id": "pjt30-415607",
+    "storage_bucket": "pjt30-415607.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:375062403447:android:70017ae1eade22bd78a972",
+        "android_client_info": {
+          "package_name": "fastcampus.aop.pjt30_food_delivery"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "375062403447-uj4d2hquvo49gdgump5b37hshl0fms9g.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "fastcampus.aop.pjt30_food_delivery",
+            "certificate_hash": "df212df39bb51d16ce5104f39d31a0cc9b0212d7"
+          }
+        },
+        {
+          "client_id": "375062403447-dmqfmnlc8mjnm8fbeq7gg4k31m94vjv5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB1o2rJeDqwkfo69pDTyurnpubc2ZUyAU8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "375062403447-dmqfmnlc8mjnm8fbeq7gg4k31m94vjv5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

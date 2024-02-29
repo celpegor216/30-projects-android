@@ -6,21 +6,31 @@ import androidx.lifecycle.viewModelScope
 import fastcampus.aop.pjt30_food_delivery.R
 import fastcampus.aop.pjt30_food_delivery.data.entity.LocationLatLngEntity
 import fastcampus.aop.pjt30_food_delivery.data.entity.MapSearchInfoEntity
+import fastcampus.aop.pjt30_food_delivery.data.entity.RestaurantFoodEntity
 import fastcampus.aop.pjt30_food_delivery.data.repository.map.MapRepository
+import fastcampus.aop.pjt30_food_delivery.data.repository.restaurant.food.RestaurantFoodRepository
 import fastcampus.aop.pjt30_food_delivery.data.repository.user.UserRepository
 import fastcampus.aop.pjt30_food_delivery.screen.base.BaseViewModel
 import kotlinx.coroutines.launch
 
 class HomeViewModel(
     private val mapRepository: MapRepository,
-    private val userRepository: UserRepository
+    private val userRepository: UserRepository,
+    private val restaurantFoodRepository: RestaurantFoodRepository
 ): BaseViewModel() {
 
     private val _homeStateLiveData = MutableLiveData<HomeState>(HomeState.Uninitialized)
     val homeStateLiveData: LiveData<HomeState> = _homeStateLiveData
 
+    private val _foodMenuBasketLiveData = MutableLiveData<List<RestaurantFoodEntity>>()
+    val foodMenuBasketLiveData: LiveData<List<RestaurantFoodEntity>> = _foodMenuBasketLiveData
+
     private fun setState(state: HomeState) {
         _homeStateLiveData.postValue(state)
+    }
+
+    private fun setFoodMenuBasket(foodMenu: List<RestaurantFoodEntity>) {
+        _foodMenuBasketLiveData.postValue(foodMenu)
     }
 
     fun loadReverseGeoInformation(
@@ -50,6 +60,10 @@ class HomeViewModel(
             is HomeState.Success -> data.mapSearchInfo
             else -> null
         }
+    }
+
+    fun checkMyBasket() = viewModelScope.launch {
+        setFoodMenuBasket(restaurantFoodRepository.getFoodMenuListInBasket())
     }
 
     companion object {

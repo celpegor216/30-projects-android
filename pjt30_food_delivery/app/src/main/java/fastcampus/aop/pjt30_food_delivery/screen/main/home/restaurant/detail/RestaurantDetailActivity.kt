@@ -1,10 +1,10 @@
 package fastcampus.aop.pjt30_food_delivery.screen.main.home.restaurant.detail
 
+import android.app.AlertDialog
 import android.content.ClipDescription
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
-import android.util.Log
 import androidx.core.content.ContextCompat
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
@@ -136,13 +136,54 @@ class RestaurantDetailActivity :
         )
 
         if (::viewPagerAdapter.isInitialized.not()) {
-            initViewPager(state.restaurantEntity.restaurantInfoId, state.restaurantFoodList)
+            initViewPager(
+                state.restaurantEntity.restaurantInfoId,
+                state.restaurantFoodList,
+                state.restaurantEntity.restaurantTitle
+            )
+        }
+
+        notifyBasketCount(state.foodMenuListInBasket)
+
+        val (isClearNeed, afterAction) = state.isClearNeedInBasketAndAction
+        if (isClearNeed) {
+            alertClearNeedInBasket(afterAction)
         }
     }
 
+    private fun alertClearNeedInBasket(afterAction: () -> Unit) {
+        AlertDialog.Builder(this)
+            .setTitle("장바구니에는 한 가게의 메뉴만 담을 수 있습니다.")
+            .setMessage("선택하신 메뉴를 장바구니에 담을 경우,\n다른 가게의 메뉴가 삭제됩니다.")
+            .setPositiveButton("담기") { dialog, _ ->
+                viewModel.notifyClearBasket()
+                afterAction()
+                dialog.dismiss()
+            }
+            .setNegativeButton("취소") { dialog, _ ->
+                dialog.dismiss()
+            }
+            .create()
+            .show()
+    }
+
+    private fun notifyBasketCount(foodMenuListInBasket: List<RestaurantFoodEntity>?) =
+        with(binding) {
+            basketCountTextView.text = if (foodMenuListInBasket.isNullOrEmpty()) {
+                "0"
+            } else {
+                getString(R.string.basket_count_format, foodMenuListInBasket.size)
+            }
+
+            basketButton.setOnClickListener {
+                // TODO 주문 화면으로 이동
+            }
+        }
+
     private fun initViewPager(
         restaurantInfoId: Long,
-        restaurantFoodList: List<RestaurantFoodEntity>?
+        restaurantFoodList: List<RestaurantFoodEntity>?,
+        restaurantTitle: String
     ) {
         viewPagerAdapter = RestaurantDetailListFragmentPagerAdapter(
             this,
@@ -152,7 +193,7 @@ class RestaurantDetailActivity :
                     ArrayList(restaurantFoodList ?: listOf())
                 ),
                 RestaurantReviewListFragment.newInstance(
-                    restaurantInfoId
+                    restaurantTitle
                 )
             )
         )
@@ -162,7 +203,7 @@ class RestaurantDetailActivity :
             binding.menuAndReviewTabLayout,
             binding.menuAndReviewViewPager
         ) { tab, position ->
-            tab.setText(RestaurantDetailCategory.values()[position].categoryNameId)
+            tab.setText(RestaurantDetailCategory.entries[position].categoryNameId)
         }.attach()
     }
 
