@@ -3,6 +3,7 @@ package fastcampus.aop.pjt30_food_delivery.screen.main.home
 import android.Manifest
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.app.AlertDialog
 import android.content.Context
 import android.location.Location
 import android.location.LocationListener
@@ -12,15 +13,19 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import com.google.android.material.tabs.TabLayoutMediator
+import com.google.firebase.auth.FirebaseAuth
 import fastcampus.aop.pjt30_food_delivery.R
 import fastcampus.aop.pjt30_food_delivery.data.entity.LocationLatLngEntity
 import fastcampus.aop.pjt30_food_delivery.data.entity.MapSearchInfoEntity
 import fastcampus.aop.pjt30_food_delivery.databinding.FragmentHomeBinding
 import fastcampus.aop.pjt30_food_delivery.screen.base.BaseFragment
+import fastcampus.aop.pjt30_food_delivery.screen.main.MainActivity
+import fastcampus.aop.pjt30_food_delivery.screen.main.MainTabMenu
 import fastcampus.aop.pjt30_food_delivery.screen.main.home.restaurant.RestaurantCategory
 import fastcampus.aop.pjt30_food_delivery.screen.main.home.restaurant.RestaurantListFragment
 import fastcampus.aop.pjt30_food_delivery.screen.main.home.restaurant.RestaurantOrder
 import fastcampus.aop.pjt30_food_delivery.screen.mylocation.MyLocationActivity
+import fastcampus.aop.pjt30_food_delivery.screen.order.OrderMenuListActivity
 import fastcampus.aop.pjt30_food_delivery.widget.adapter.RestaurantListFragmentPagerAdapter
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -32,8 +37,9 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
 
     private lateinit var viewPagerAdapter: RestaurantListFragmentPagerAdapter
 
-    private lateinit var locationManager: LocationManager
+    private val firebaseAuth by lazy { FirebaseAuth.getInstance() }
 
+    private lateinit var locationManager: LocationManager
     private lateinit var myLocationListener: MyLocationListener
 
     private val locationPermissionLauncher =
@@ -193,13 +199,34 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
                 binding.basketButtonContainer.isVisible = true
                 binding.basketCountTextView.text = getString(R.string.basket_count_format, it.size)
                 binding.basketButton.setOnClickListener {
-                    // TODO 주문 화면으로 이동 or 로그인
+                    if (firebaseAuth.currentUser == null) {
+                        alertLoginNeed {
+                            (requireActivity() as MainActivity).goToTab(MainTabMenu.MY)
+                        }
+                    } else {
+                        startActivity(OrderMenuListActivity.newIntent(requireContext()))
+                    }
                 }
             } else {
                 binding.basketButtonContainer.isGone = true
                 binding.basketButton.setOnClickListener(null)
             }
         }
+    }
+
+    private fun alertLoginNeed(afterAction: () -> Unit) {
+        AlertDialog.Builder(requireContext())
+            .setTitle("로그인이 필요합니다.")
+            .setMessage("My 탭으로 이동하시겠습니까?")
+            .setPositiveButton("네") { dialog, _ ->
+                afterAction()
+                dialog.dismiss()
+            }
+            .setNegativeButton("아니오") { dialog, _ ->
+                dialog.dismiss()
+            }
+            .create()
+            .show()
     }
 
     private fun getMyLocation() {

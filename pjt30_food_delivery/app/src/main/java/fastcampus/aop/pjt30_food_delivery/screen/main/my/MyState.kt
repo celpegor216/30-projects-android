@@ -2,6 +2,7 @@ package fastcampus.aop.pjt30_food_delivery.screen.main.my
 
 import android.net.Uri
 import androidx.annotation.StringRes
+import fastcampus.aop.pjt30_food_delivery.data.entity.OrderEntity
 
 sealed class MyState {
 
@@ -16,7 +17,8 @@ sealed class MyState {
     sealed class Success: MyState() {
         data class Registered(
             val username: String,
-            val profileImageUri: Uri?
+            val profileImageUri: Uri?,
+            val orderList: List<OrderEntity>
         ): Success()
 
         object NotRegistered: Success()

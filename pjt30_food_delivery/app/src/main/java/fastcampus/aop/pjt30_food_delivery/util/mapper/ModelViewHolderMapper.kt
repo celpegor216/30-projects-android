@@ -4,6 +4,8 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import fastcampus.aop.pjt30_food_delivery.databinding.ViewholderEmptyBinding
 import fastcampus.aop.pjt30_food_delivery.databinding.ViewholderFoodMenuBinding
+import fastcampus.aop.pjt30_food_delivery.databinding.ViewholderLikeRestaurantBinding
+import fastcampus.aop.pjt30_food_delivery.databinding.ViewholderOrderMenuBinding
 import fastcampus.aop.pjt30_food_delivery.databinding.ViewholderRestaurantBinding
 import fastcampus.aop.pjt30_food_delivery.databinding.ViewholderRestaurantReviewBinding
 import fastcampus.aop.pjt30_food_delivery.model.CellType
@@ -13,8 +15,10 @@ import fastcampus.aop.pjt30_food_delivery.util.provider.ResourcesProvider
 import fastcampus.aop.pjt30_food_delivery.widget.adapter.viewholder.EmptyViewHolder
 import fastcampus.aop.pjt30_food_delivery.widget.adapter.viewholder.ModelViewHolder
 import fastcampus.aop.pjt30_food_delivery.widget.adapter.viewholder.restaurant.RestaurantViewHolder
-import fastcampus.aop.pjt30_food_delivery.widget.adapter.viewholder.restaurant.food.FoodMenuViewHolder
-import fastcampus.aop.pjt30_food_delivery.widget.adapter.viewholder.restaurant.review.RestaurantReviewViewHolder
+import fastcampus.aop.pjt30_food_delivery.widget.adapter.viewholder.food.FoodMenuViewHolder
+import fastcampus.aop.pjt30_food_delivery.widget.adapter.viewholder.order.OrderMenuViewHolder
+import fastcampus.aop.pjt30_food_delivery.widget.adapter.viewholder.restaurant.LikeRestaurantViewHolder
+import fastcampus.aop.pjt30_food_delivery.widget.adapter.viewholder.review.RestaurantReviewViewHolder
 
 object ModelViewHolderMapper {
 
@@ -40,8 +44,20 @@ object ModelViewHolderMapper {
                 resourcesProvider
             )
 
+            CellType.LIKE_RESTAURANT_CELL -> LikeRestaurantViewHolder(
+                ViewholderLikeRestaurantBinding.inflate(inflater, parent, false),
+                viewModel,
+                resourcesProvider
+            )
+
             CellType.FOOD_CELL -> FoodMenuViewHolder(
                 ViewholderFoodMenuBinding.inflate(inflater, parent, false),
+                viewModel,
+                resourcesProvider
+            )
+
+            CellType.ORDER_FOOD_CELL -> OrderMenuViewHolder(
+                ViewholderOrderMenuBinding.inflate(inflater, parent, false),
                 viewModel,
                 resourcesProvider
             )

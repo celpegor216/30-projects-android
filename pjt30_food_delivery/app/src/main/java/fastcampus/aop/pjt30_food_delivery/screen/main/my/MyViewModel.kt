@@ -4,7 +4,11 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.google.firebase.auth.FirebaseUser
+import fastcampus.aop.pjt30_food_delivery.data.entity.OrderEntity
 import fastcampus.aop.pjt30_food_delivery.data.preference.AppPreferenceManager
+import fastcampus.aop.pjt30_food_delivery.data.repository.order.DefaultOrderRepository
+import fastcampus.aop.pjt30_food_delivery.data.repository.order.OrderRepository
+import fastcampus.aop.pjt30_food_delivery.data.repository.user.UserRepository
 import fastcampus.aop.pjt30_food_delivery.screen.base.BaseViewModel
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Job
@@ -13,7 +17,9 @@ import kotlinx.coroutines.withContext
 
 class MyViewModel(
     private val ioDispatcher: CoroutineDispatcher,
-    private val appPreferenceManager: AppPreferenceManager
+    private val appPreferenceManager: AppPreferenceManager,
+    private val userRepository: UserRepository,
+    private val orderRepository: OrderRepository
 ): BaseViewModel() {
 
     private val _myStateLiveData = MutableLiveData<MyState>(MyState.Uninitialized)
@@ -42,10 +48,17 @@ class MyViewModel(
 
     fun setUserInfo(firebaseUser: FirebaseUser?) = viewModelScope.launch() {
         firebaseUser?.let { user ->
-            setState(MyState.Success.Registered(
-                username = user.displayName ?: "익명의 사용자",
-                profileImageUri = user.photoUrl
-            ))
+            when (val orderMenuResult = orderRepository.getAllOrderMenu(user.uid)) {
+                is DefaultOrderRepository.Result.Success<*> -> {
+                    val orderList = orderMenuResult.data as List<OrderEntity>
+                    setState(MyState.Success.Registered(
+                        username = user.displayName ?: "익명의 사용자",
+                        profileImageUri = user.photoUrl,
+                        orderList = orderList
+                    ))
+                }
+                is DefaultOrderRepository.Result.Error -> {}
+            }
         } ?: run {
             setState(MyState.Success.NotRegistered)
         }
@@ -55,6 +68,7 @@ class MyViewModel(
         withContext(ioDispatcher) {
             appPreferenceManager.removeIdToken()
         }
+        userRepository.deleteAllUserLikedRestaurant()
         fetchData()
     }
 }

@@ -34,8 +34,21 @@
 
     <!--  FoodMenu Item  -->
     <string name="price_format">%1$,d원</string>
+
+    <!--  My  -->
     <string name="logout">로그아웃</string>
-    <string name="empty_orders">주문 목록이 존재하지 않습니다.</string>
+    <string name="empty_order_list">주문 목록이 존재하지 않습니다.</string>
     <string name="google_login_required">구글 로그인이 필요합니다.</string>
+
+    <!--  Restaurant Like List  -->
+    <string name="restaurant_like_list">찜 목록</string>
+    <string name="empty_restaurant_like_list">찜 목록이 존재하지 않습니다.</string>
+
+    <!--  Order Menu List  -->
+    <string name="check_order_list">주문 확인</string>
+    <string name="clear_order_list">전체 삭제</string>
+    <string name="confirm_order_list">주문하기</string>
+    <string name="request_error">요청했으나 예상치 못한 문제가 발생했습니다 : %s</string>
+    <string name="user_id_not_found">사용자 ID가 존재하지 않습니다.</string>
 
 </resources>

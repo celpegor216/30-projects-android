@@ -1,6 +1,7 @@
 package fastcampus.aop.pjt30_food_delivery.screen.main.my
 
 import android.app.Activity
+import android.util.Log
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.view.isGone

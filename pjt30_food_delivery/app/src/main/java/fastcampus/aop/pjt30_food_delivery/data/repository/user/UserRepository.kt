@@ -11,7 +11,11 @@ interface UserRepository {
 
     suspend fun getUserLikedRestaurant(restaurantTitle: String): RestaurantEntity?
 
+    suspend fun getUserLikedRestaurantList(): List<RestaurantEntity>
+
     suspend fun insertUserLikedRestaurant(restaurantEntity: RestaurantEntity)
 
     suspend fun deleteUserLikedRestaurant(restaurantTitle: String)
+
+    suspend fun deleteAllUserLikedRestaurant()
 }

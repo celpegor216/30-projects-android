@@ -1,4 +1,4 @@
-package fastcampus.aop.pjt30_food_delivery.widget.adapter.viewholder.restaurant.review
+package fastcampus.aop.pjt30_food_delivery.widget.adapter.viewholder.review
 
 import androidx.core.view.isGone
 import androidx.core.view.isVisible

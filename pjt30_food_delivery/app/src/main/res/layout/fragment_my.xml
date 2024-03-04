@@ -57,7 +57,7 @@
         android:id="@+id/emptyResultTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/empty_orders"
+        android:text="@string/empty_order_list"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="@id/recyclerView"
         app:layout_constraintEnd_toEndOf="@id/recyclerView"

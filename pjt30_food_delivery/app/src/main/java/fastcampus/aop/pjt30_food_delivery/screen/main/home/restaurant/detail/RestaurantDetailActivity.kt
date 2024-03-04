@@ -5,11 +5,16 @@ import android.content.ClipDescription
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
+import android.util.Log
+import android.widget.Toast
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.content.ContextCompat
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
+import androidx.lifecycle.lifecycleScope
 import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.tabs.TabLayoutMediator
+import com.google.firebase.auth.FirebaseAuth
 import fastcampus.aop.pjt30_food_delivery.R
 import fastcampus.aop.pjt30_food_delivery.data.entity.RestaurantEntity
 import fastcampus.aop.pjt30_food_delivery.data.entity.RestaurantFoodEntity
@@ -17,10 +22,16 @@ import fastcampus.aop.pjt30_food_delivery.databinding.ActivityRestaurantDetailBi
 import fastcampus.aop.pjt30_food_delivery.extension.fromDpToPx
 import fastcampus.aop.pjt30_food_delivery.extension.load
 import fastcampus.aop.pjt30_food_delivery.screen.base.BaseActivity
+import fastcampus.aop.pjt30_food_delivery.screen.main.MainActivity
+import fastcampus.aop.pjt30_food_delivery.screen.main.MainTabMenu
 import fastcampus.aop.pjt30_food_delivery.screen.main.home.restaurant.RestaurantListFragment
 import fastcampus.aop.pjt30_food_delivery.screen.main.home.restaurant.detail.menu.RestaurantMenuListFragment
 import fastcampus.aop.pjt30_food_delivery.screen.main.home.restaurant.detail.review.RestaurantReviewListFragment
+import fastcampus.aop.pjt30_food_delivery.screen.order.OrderMenuListActivity
+import fastcampus.aop.pjt30_food_delivery.util.event.MenuChangeEventBus
 import fastcampus.aop.pjt30_food_delivery.widget.adapter.RestaurantDetailListFragmentPagerAdapter
+import kotlinx.coroutines.launch
+import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 import kotlin.math.abs
@@ -38,6 +49,10 @@ class RestaurantDetailActivity :
     override fun getViewBinding() = ActivityRestaurantDetailBinding.inflate(layoutInflater)
 
     private lateinit var viewPagerAdapter: RestaurantDetailListFragmentPagerAdapter
+
+    private val firebaseAuth by lazy { FirebaseAuth.getInstance() }
+
+    private val menuChangeEventBus by inject<MenuChangeEventBus>()
 
     override fun initViews() {
         super.initViews()
@@ -90,6 +105,11 @@ class RestaurantDetailActivity :
                 startActivity(intent)
             }
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        viewModel.checkMyBasket()
     }
 
     override fun observeData() = viewModel.restaurantDetailStateLiveData.observe(this) {
@@ -176,7 +196,21 @@ class RestaurantDetailActivity :
             }
 
             basketButton.setOnClickListener {
-                // TODO 주문 화면으로 이동
+                if (firebaseAuth.currentUser == null) {
+                    alertLoginNeed {
+                        lifecycleScope.launch {
+                            menuChangeEventBus.changeMenu(MainTabMenu.MY)
+                            finish()
+                        }
+                    }
+                } else {
+                    if (foodMenuListInBasket.isNullOrEmpty()) {
+                        Toast.makeText(this@RestaurantDetailActivity, "주문할 메뉴를 추가해주세요.", Toast.LENGTH_SHORT).show()
+                        return@setOnClickListener
+                    }
+
+                    startActivity(OrderMenuListActivity.newIntent(this@RestaurantDetailActivity))
+                }
             }
         }
 
@@ -205,6 +239,21 @@ class RestaurantDetailActivity :
         ) { tab, position ->
             tab.setText(RestaurantDetailCategory.entries[position].categoryNameId)
         }.attach()
+    }
+
+    private fun alertLoginNeed(afterAction: () -> Unit) {
+        AlertDialog.Builder(this)
+            .setTitle("로그인이 필요합니다.")
+            .setMessage("My 탭으로 이동하시겠습니까?")
+            .setPositiveButton("네") { dialog, _ ->
+                afterAction()
+                dialog.dismiss()
+            }
+            .setNegativeButton("아니오") { dialog, _ ->
+                dialog.dismiss()
+            }
+            .create()
+            .show()
     }
 
     companion object {
