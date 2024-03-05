@@ -27,13 +27,13 @@ class RestaurantReviewViewHolder(
 
         if (model.thumbnailImageUri != null) {
             reviewThumbnailImageView.isVisible = true
-            reviewThumbnailImageView.load(model.thumbnailImageUri.toString(), 24f)
+            reviewThumbnailImageView.load(model.thumbnailImageUri.toString())
         } else {
             reviewThumbnailImageView.isGone = true
         }
         reviewTitleTextView.text = model.title
         reviewContentTextView.text = model.description
-        ratingBar.rating = model.grade.toFloat()
+        ratingBar.rating = model.grade
     }
 
     override fun bindViews(model: RestaurantReviewModel, adapterListener: AdapterListener) = Unit

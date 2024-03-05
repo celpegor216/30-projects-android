@@ -4,11 +4,13 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.google.firebase.auth.FirebaseUser
+import fastcampus.aop.pjt30_food_delivery.R
 import fastcampus.aop.pjt30_food_delivery.data.entity.OrderEntity
 import fastcampus.aop.pjt30_food_delivery.data.preference.AppPreferenceManager
 import fastcampus.aop.pjt30_food_delivery.data.repository.order.DefaultOrderRepository
 import fastcampus.aop.pjt30_food_delivery.data.repository.order.OrderRepository
 import fastcampus.aop.pjt30_food_delivery.data.repository.user.UserRepository
+import fastcampus.aop.pjt30_food_delivery.model.order.OrderModel
 import fastcampus.aop.pjt30_food_delivery.screen.base.BaseViewModel
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Job
@@ -54,10 +56,21 @@ class MyViewModel(
                     setState(MyState.Success.Registered(
                         username = user.displayName ?: "익명의 사용자",
                         profileImageUri = user.photoUrl,
-                        orderList = orderList
+                        orderList = orderList.map {
+                            OrderModel(
+                                id = it.hashCode().toLong(),
+                                orderId = it.id,
+                                userId = it.userId,
+                                restaurantId = it.restaurantId,
+                                restaurantTitle = it.restaurantTitle,
+                                foodMenuList = it.foodMenuList
+                            )
+                        }
                     ))
                 }
-                is DefaultOrderRepository.Result.Error -> {}
+                is DefaultOrderRepository.Result.Error -> {
+                    setState(MyState.Error(R.string.request_error, orderMenuResult.e))
+                }
             }
         } ?: run {
             setState(MyState.Success.NotRegistered)

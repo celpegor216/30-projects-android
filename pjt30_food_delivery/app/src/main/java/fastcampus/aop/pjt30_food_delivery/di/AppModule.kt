@@ -1,12 +1,16 @@
 package fastcampus.aop.pjt30_food_delivery.di
 
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.ktx.storage
 import fastcampus.aop.pjt30_food_delivery.data.entity.LocationLatLngEntity
 import fastcampus.aop.pjt30_food_delivery.data.entity.MapSearchInfoEntity
 import fastcampus.aop.pjt30_food_delivery.data.entity.RestaurantEntity
 import fastcampus.aop.pjt30_food_delivery.data.entity.RestaurantFoodEntity
 import fastcampus.aop.pjt30_food_delivery.data.preference.AppPreferenceManager
+import fastcampus.aop.pjt30_food_delivery.data.repository.gallery.DefaultGalleryPhotoRepository
+import fastcampus.aop.pjt30_food_delivery.data.repository.gallery.GalleryPhotoRepository
 import fastcampus.aop.pjt30_food_delivery.data.repository.map.DefaultMapRepository
 import fastcampus.aop.pjt30_food_delivery.data.repository.map.MapRepository
 import fastcampus.aop.pjt30_food_delivery.data.repository.order.DefaultOrderRepository
@@ -29,6 +33,7 @@ import fastcampus.aop.pjt30_food_delivery.screen.main.like.RestaurantLikeListVie
 import fastcampus.aop.pjt30_food_delivery.screen.main.my.MyViewModel
 import fastcampus.aop.pjt30_food_delivery.screen.mylocation.MyLocationViewModel
 import fastcampus.aop.pjt30_food_delivery.screen.order.OrderMenuListViewModel
+import fastcampus.aop.pjt30_food_delivery.screen.review.gallery.GalleryViewModel
 import fastcampus.aop.pjt30_food_delivery.util.event.MenuChangeEventBus
 import fastcampus.aop.pjt30_food_delivery.util.provider.DefaultResourcesProvider
 import fastcampus.aop.pjt30_food_delivery.util.provider.ResourcesProvider
@@ -74,15 +79,17 @@ val appModule = module {
     }
     viewModel { (restaurantTitle: String) -> RestaurantReviewListViewModel(restaurantTitle, get()) }
     viewModel { RestaurantLikeListViewModel(get()) }
-    viewModel { OrderMenuListViewModel(get(), get()) }
+    viewModel { (firebaseAuth: FirebaseAuth) -> OrderMenuListViewModel(get(), get(), firebaseAuth) }
+    viewModel { GalleryViewModel(get()) }
 
     // Repository
     single<RestaurantRepository> { DefaultRestaurantRepository(get(), get(), get()) }
     single<MapRepository> { DefaultMapRepository(get(), get()) }
     single<UserRepository> { DefaultUserRepository(get(), get(), get()) }
     single<RestaurantFoodRepository> { DefaultRestaurantFoodRepository(get(), get(), get()) }
-    single<RestaurantReviewRepository> { DefaultRestaurantReviewRepository(get()) }
+    single<RestaurantReviewRepository> { DefaultRestaurantReviewRepository(get(), get()) }
     single<OrderRepository> { DefaultOrderRepository(get(), get()) }
+    single<GalleryPhotoRepository> { DefaultGalleryPhotoRepository(androidApplication(), get()) }
 
     // Database
     single { provideDB(androidApplication()) }
@@ -99,6 +106,12 @@ val appModule = module {
     // Event
     single { MenuChangeEventBus() }
 
+    // Firebase Auth
+    single { FirebaseAuth.getInstance() }
+
     // Firestore
     single { Firebase.firestore }
+
+    // Firebase Storage
+    single { Firebase.storage }
 }

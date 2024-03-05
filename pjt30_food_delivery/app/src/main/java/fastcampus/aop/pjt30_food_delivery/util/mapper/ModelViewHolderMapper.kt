@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import fastcampus.aop.pjt30_food_delivery.databinding.ViewholderEmptyBinding
 import fastcampus.aop.pjt30_food_delivery.databinding.ViewholderFoodMenuBinding
 import fastcampus.aop.pjt30_food_delivery.databinding.ViewholderLikeRestaurantBinding
+import fastcampus.aop.pjt30_food_delivery.databinding.ViewholderOrderBinding
 import fastcampus.aop.pjt30_food_delivery.databinding.ViewholderOrderMenuBinding
 import fastcampus.aop.pjt30_food_delivery.databinding.ViewholderRestaurantBinding
 import fastcampus.aop.pjt30_food_delivery.databinding.ViewholderRestaurantReviewBinding
@@ -17,6 +18,7 @@ import fastcampus.aop.pjt30_food_delivery.widget.adapter.viewholder.ModelViewHol
 import fastcampus.aop.pjt30_food_delivery.widget.adapter.viewholder.restaurant.RestaurantViewHolder
 import fastcampus.aop.pjt30_food_delivery.widget.adapter.viewholder.food.FoodMenuViewHolder
 import fastcampus.aop.pjt30_food_delivery.widget.adapter.viewholder.order.OrderMenuViewHolder
+import fastcampus.aop.pjt30_food_delivery.widget.adapter.viewholder.order.OrderViewHolder
 import fastcampus.aop.pjt30_food_delivery.widget.adapter.viewholder.restaurant.LikeRestaurantViewHolder
 import fastcampus.aop.pjt30_food_delivery.widget.adapter.viewholder.review.RestaurantReviewViewHolder
 
@@ -58,6 +60,12 @@ object ModelViewHolderMapper {
 
             CellType.ORDER_FOOD_CELL -> OrderMenuViewHolder(
                 ViewholderOrderMenuBinding.inflate(inflater, parent, false),
+                viewModel,
+                resourcesProvider
+            )
+
+            CellType.ORDER_CELL -> OrderViewHolder(
+                ViewholderOrderBinding.inflate(inflater, parent, false),
                 viewModel,
                 resourcesProvider
             )

@@ -29,7 +29,10 @@ class RestaurantDetailViewModel(
     override fun fetchData(): Job = viewModelScope.launch {
         setState(RestaurantDetailState.Loading)
 
-        val foods = restaurantFoodRepository.getFoods(restaurantEntity.restaurantInfoId)
+        val foods = restaurantFoodRepository.getFoods(
+            restaurantEntity.restaurantInfoId,
+            restaurantEntity.restaurantTitle
+        )
         val foodMenuListInBasket = restaurantFoodRepository.getFoodMenuListInBasket()
         val isLiked =
             userRepository.getUserLikedRestaurant(restaurantEntity.restaurantTitle) != null
@@ -106,9 +109,11 @@ class RestaurantDetailViewModel(
         viewModelScope.launch {
             when (val data = restaurantDetailStateLiveData.value) {
                 is RestaurantDetailState.Success -> {
-                    setState(data.copy(
-                        isClearNeedInBasketAndAction = Pair(clearNeed, afterAction)
-                    ))
+                    setState(
+                        data.copy(
+                            isClearNeedInBasketAndAction = Pair(clearNeed, afterAction)
+                        )
+                    )
                 }
 
                 else -> Unit
@@ -131,9 +136,11 @@ class RestaurantDetailViewModel(
     fun checkMyBasket() = viewModelScope.launch {
         when (val data = restaurantDetailStateLiveData.value) {
             is RestaurantDetailState.Success -> {
-                setState(data.copy(
-                    foodMenuListInBasket = restaurantFoodRepository.getFoodMenuListInBasket(),
-                ))
+                setState(
+                    data.copy(
+                        foodMenuListInBasket = restaurantFoodRepository.getFoodMenuListInBasket(),
+                    )
+                )
             }
 
             else -> Unit

@@ -16,12 +16,14 @@ class DefaultOrderRepository(
     override suspend fun orderMenu(
         userId: String,
         restaurantId: Long,
+        restaurantTitle: String,
         foodMenuList: List<RestaurantFoodEntity>
     ): Result = withContext(ioDispatcher) {
         val result: Result
         val orderMenuData = hashMapOf(
-            "restaurantId" to restaurantId,
             "userId" to userId,
+            "restaurantId" to restaurantId,
+            "restaurantTitle" to restaurantTitle,
             "orderMenuList" to foodMenuList
         )
         result = try {
@@ -47,6 +49,7 @@ class DefaultOrderRepository(
                     id = it.id,
                     userId = it.get("userId") as String,
                     restaurantId = it.get("restaurantId") as Long,
+                    restaurantTitle = it.get("restaurantTitle") as String,
                     foodMenuList = (it.get("orderMenuList") as ArrayList<Map<String, Any>>).map { food ->
                         RestaurantFoodEntity(
                             id = food["id"] as String,
@@ -54,6 +57,7 @@ class DefaultOrderRepository(
                             price = (food["price"] as Long).toInt(),
                             imageUrl = food["imageUrl"] as String,
                             restaurantId = food["restaurantId"] as Long,
+                            restaurantTitle = food["restaurantTitle"] as String,
                             description = food["description"] as String
                         )
                     }

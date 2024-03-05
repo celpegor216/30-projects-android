@@ -1,7 +1,6 @@
 package fastcampus.aop.pjt30_food_delivery.screen.main.my
 
 import android.app.Activity
-import android.util.Log
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.view.isGone
@@ -14,10 +13,16 @@ import com.google.firebase.auth.GoogleAuthProvider
 import fastcampus.aop.pjt30_food_delivery.R
 import fastcampus.aop.pjt30_food_delivery.databinding.FragmentMyBinding
 import fastcampus.aop.pjt30_food_delivery.extension.load
+import fastcampus.aop.pjt30_food_delivery.model.order.OrderModel
 import fastcampus.aop.pjt30_food_delivery.screen.base.BaseFragment
+import fastcampus.aop.pjt30_food_delivery.screen.review.AddReviewActivity
+import fastcampus.aop.pjt30_food_delivery.util.provider.ResourcesProvider
+import fastcampus.aop.pjt30_food_delivery.widget.adapter.ModelRecyclerAdapter
+import fastcampus.aop.pjt30_food_delivery.widget.adapter.listener.order.OrderListListener
+import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class MyFragment: BaseFragment<MyViewModel, FragmentMyBinding>() {
+class MyFragment : BaseFragment<MyViewModel, FragmentMyBinding>() {
 
     override val viewModel by viewModel<MyViewModel>()
 
@@ -40,18 +45,37 @@ class MyFragment: BaseFragment<MyViewModel, FragmentMyBinding>() {
         FirebaseAuth.getInstance()
     }
 
-    private val loginLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-        if (result.resultCode == Activity.RESULT_OK) {
-            val task = GoogleSignIn.getSignedInAccountFromIntent(result.data)
-            try {
-                task.getResult(ApiException::class.java)?.let { account ->
-                    viewModel.saveToken(account.idToken ?: throw Exception())
+    private val loginLauncher =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == Activity.RESULT_OK) {
+                val task = GoogleSignIn.getSignedInAccountFromIntent(result.data)
+                try {
+                    task.getResult(ApiException::class.java)?.let { account ->
+                        viewModel.saveToken(account.idToken ?: throw Exception())
+                    }
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                    Toast.makeText(requireContext(), "구글 로그인 중 오류가 발생했습니다.", Toast.LENGTH_SHORT)
+                        .show()
                 }
-            } catch (e: Exception) {
-                e.printStackTrace()
-                Toast.makeText(requireContext(), "구글 로그인 중 오류가 발생했습니다.", Toast.LENGTH_SHORT).show()
             }
         }
+
+    private val resourcesProvider by inject<ResourcesProvider>()
+
+    private val adapter by lazy {
+        ModelRecyclerAdapter<OrderModel, MyViewModel>(
+            listOf(),
+            viewModel,
+            resourcesProvider,
+            object :
+                OrderListListener {
+                override fun writeReview(orderId: String, restaurantTitle: String) {
+                    startActivity(
+                        AddReviewActivity.newIntent(requireContext(), orderId, restaurantTitle)
+                    )
+                }
+            })
     }
 
     override fun initViews() = with(binding) {
@@ -63,6 +87,8 @@ class MyFragment: BaseFragment<MyViewModel, FragmentMyBinding>() {
             firebaseAuth.signOut()
             viewModel.signOut()
         }
+
+        recyclerView.adapter = adapter
     }
 
     private fun signInGoogle() {
@@ -119,6 +145,7 @@ class MyFragment: BaseFragment<MyViewModel, FragmentMyBinding>() {
         loginRequiredGroup.isGone = true
         profileImageView.load(state.profileImageUri.toString(), 60f)
         usernameTextView.text = state.username
+        adapter.submitList(state.orderList)
     }
 
     private fun handleErrorState(state: MyState.Error) {

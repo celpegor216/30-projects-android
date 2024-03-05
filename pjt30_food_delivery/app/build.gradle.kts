@@ -92,4 +92,21 @@ dependencies {
     // Firebase Firestore
     implementation("com.google.firebase:firebase-firestore-ktx")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.7.3")
+
+    // Firebase Storage
+    implementation("com.google.firebase:firebase-storage-ktx")
+
+    // CameraX
+    val cameraxVersion = "1.2.2"
+    implementation ("androidx.camera:camera-camera2:${cameraxVersion}")
+    implementation ("androidx.camera:camera-lifecycle:${cameraxVersion}")
+    implementation ("androidx.camera:camera-view:${cameraxVersion}")
+
+    // Circle Indicator
+    implementation("me.relex:circleindicator:2.1.6")
+
+    // Test
+    testImplementation("io.insert-koin:koin-android-test:3.5.3")
+    testImplementation("org.mockito:mockito-inline:5.2.0")
+    testImplementation("androidx.arch.core:core-testing:2.2.0")    // android가 아닌 androidx
 }

@@ -7,6 +7,7 @@ interface OrderRepository {
     suspend fun orderMenu(
         userId: String,
         restaurantId: Long,
+        restaurantTitle: String,
         foodMenuList: List<RestaurantFoodEntity>
     ): DefaultOrderRepository.Result
 

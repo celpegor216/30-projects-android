@@ -46,6 +46,7 @@ class RestaurantMenuListViewModel(
                 price = it.price,
                 imageUrl = it.imageUrl,
                 restaurantId = it.restaurantId,
+                restaurantTitle = it.restaurantTitle,
                 foodId = it.id
             )
         })
